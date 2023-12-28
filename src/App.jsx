@@ -1,11 +1,33 @@
 import React from "react"
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom"
+import NoPage from "./pages/noPage"
+import Layout from "./pages/layout"
+import Home from "./pages/home"
+import About from "./pages/about"
 
-function App() {
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      element: <Layout/>,
+      errorElement: <NoPage/>,
+      children: [
+        {
+          index: true,
+          element: <Home/>,
+        },
+        {
+          path: 'about',
+          element: <About/>
+        }
+      ],
+    },
+  ])
+
   return (
-    <div className="flex flex-row h-screen w-full">
-      <div className="w-3/5 p-10 bg-grey-100 border-b">Left</div>
-      <div className="w-2/5 p-10 bg-gray-800 shadow-inner">Right</div>
-    </div>
+    <RouterProvider router={router} />
   )
 }
 
