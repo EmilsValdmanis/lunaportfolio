@@ -4,8 +4,11 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import { useUploadFile } from 'react-firebase-hooks/storage'
 import { storage } from "../../utils/firebase.utils"
 import { ref, listAll, getDownloadURL } from "firebase/storage"
+import { useNavigate } from "react-router-dom"
+
 
 const Home = () => {
+  const navigate = useNavigate()
   const [user] = useAuthState(auth)
   const [selectedFile, setSelectedFile] = useState(null)
   const [uploadFile] = useUploadFile()
@@ -28,7 +31,7 @@ const Home = () => {
   const uploadImage = async () => {
     if (selectedFile) {
       await uploadFile(ref(storage, selectedFile.name), selectedFile, { contentType: 'image/jpeg' })
-      fetchImages()
+      navigate('/')
     }
   }
 
