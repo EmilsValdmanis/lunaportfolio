@@ -25,7 +25,7 @@ const About = () => {
       <div className="w-1/2 flex flex-col justify-center">
           <img
           src={LunaImage}
-          alt="Luna image"
+          alt="Luna"
           className="w-full rounded-xl"
         />
       </div>
