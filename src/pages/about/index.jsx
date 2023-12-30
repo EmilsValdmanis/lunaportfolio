@@ -3,8 +3,8 @@ import LunaImage from "../../assets/luna.png"
 
 const About = () => {
   return (
-    <div className="max-w-7xl mx-auto flex gap-16">
-      <div className="w-1/2">
+    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
+      <div className="w-full lg:w-1/2">
         <h1 className="font-calligraphy text-7xl">About our little Luna</h1>
         <div className="flex flex-col gap-4 py-8 text-lg">
           <p>
@@ -22,8 +22,8 @@ const About = () => {
         </div>
         
       </div>
-      <div className="w-1/2 flex flex-col justify-center">
-          <img
+      <div className="w-full lg:w-1/2 flex flex-col justify-center">
+        <img
           src={LunaImage}
           alt="Luna"
           className="w-full rounded-xl"
