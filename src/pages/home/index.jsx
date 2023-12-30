@@ -5,7 +5,6 @@ import { useUploadFile } from 'react-firebase-hooks/storage'
 import { storage } from "../../utils/firebase.utils"
 import { ref, listAll, getDownloadURL } from "firebase/storage"
 
-
 const Home = () => {
   const [user] = useAuthState(auth)
   const [selectedFile, setSelectedFile] = useState(null)
@@ -39,7 +38,7 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <div className="flex justify-center">
         {user && (
           <>
             <input
@@ -58,8 +57,17 @@ const Home = () => {
           </>
         )}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {allImages.map((imageUrl, index) => <img src={imageUrl} key={index} alt={imageUrl} className=""/>)}
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 xl:gap-4 max-w-7xl m-auto">
+        {allImages.map((imageUrl, index) => 
+          <img
+            src={imageUrl}
+            key={index}
+            alt={imageUrl}
+            className={`rounded-lg object-fit ${
+              Math.random() <= 0.4 ? "grid-cols-subgrid col-span-1" : "col-span-2"
+            }`}
+          />
+        )}
       </div>
     </>
   )

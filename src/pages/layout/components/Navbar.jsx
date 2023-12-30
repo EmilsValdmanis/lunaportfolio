@@ -13,8 +13,8 @@ const Navbar = ({ user }) => {
   }
 
   return (
-    <div className="flex px-16 py-8 w-full bg-gray-100 justify-between items-center font-calligraphy">
-      <Link to={`/`} className="text-5xl">Luna's Portfolio</Link>
+    <div className="flex flex-col md:flex-row px-16 py-8 w-full bg-gray-100 justify-between items-center font-calligraphy">
+      <Link to={`/`} className="text-7xl">Luna</Link>
       <div className="flex gap-8 text-4xl">
         <Link to={`/`}>Home</Link>
         <Link to={`/about`}>About</Link>
