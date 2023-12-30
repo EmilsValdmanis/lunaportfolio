@@ -25,13 +25,17 @@ const Home = () => {
   }
 
   useEffect(() => {
-    fetchImages()
+    const fetchData = async () => {
+      await fetchImages()
+    }
+
+    fetchData()
   }, [])
 
   const uploadImage = async () => {
     if (selectedFile) {
       await uploadFile(ref(storage, selectedFile.name), selectedFile, { contentType: 'image/jpeg' })
-      navigate('/')
+      await fetchImages()
     }
   }
 
@@ -56,8 +60,8 @@ const Home = () => {
           </>
         )}
       </div>
-      <div>
-        {allImages.map((imageUrl, index) => <img src={imageUrl} key={index} alt={imageUrl} />)}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {allImages.map((imageUrl, index) => <img src={imageUrl} key={index} alt={imageUrl} className=""/>)}
       </div>
     </>
   )
