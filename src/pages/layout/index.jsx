@@ -16,7 +16,7 @@ const Layout = () => {
       <Navbar
         user={user}
       />
-      <main className="grow p-10 flex flex-col">
+      <main className="grow p-10 flex flex-col shadow-inner">
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet/>
         </Suspense>

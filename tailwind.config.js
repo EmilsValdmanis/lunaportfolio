@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'calligraphy': ['Calligraphy', 'sans-serif']
+      },
       colors: {
         gray: {
           50: '#FFFFFF',
