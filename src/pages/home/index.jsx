@@ -8,7 +8,7 @@ import { ref, listAll, getDownloadURL } from "firebase/storage"
 const Home = () => {
   const [user] = useAuthState(auth)
   const [selectedFile, setSelectedFile] = useState(null)
-  const [uploadFile, uploading, snapshot, error] = useUploadFile()
+  const [uploadFile] = useUploadFile()
   const [allImages, setAllImages] = useState([])
 
   const fetchImages = async () => {
@@ -54,7 +54,7 @@ const Home = () => {
         )}
       </div>
       <div>
-        {allImages.map((imageUrl, index) => <img src={imageUrl} key={index} />)}
+        {allImages.map((imageUrl, index) => <img src={imageUrl} key={index} alt={imageUrl} />)}
       </div>
     </>
   )
