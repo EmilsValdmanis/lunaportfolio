@@ -21,7 +21,9 @@ const Layout = () => {
           <Outlet/>
         </Suspense>
       </main>
-      <Footer/>
+      <Footer
+        user={user}
+      />
     </div>
   )
 }
