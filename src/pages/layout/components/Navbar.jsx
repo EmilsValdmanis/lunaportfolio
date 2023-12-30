@@ -14,10 +14,25 @@ const Navbar = ({ user }) => {
 
   return (
     <div className="flex flex-col md:flex-row px-16 py-8 w-full bg-gray-100 justify-between items-center font-calligraphy">
-      <Link to={`/`} className="text-7xl">Luna</Link>
+      <Link
+        to={`/`}
+        className="text-7xl border-b-2 border-transparent hover:border-orange-500"
+      >
+        Luna
+      </Link>
       <div className="flex gap-8 text-4xl">
-        <Link to={`/`}>Home</Link>
-        <Link to={`/about`}>About</Link>
+        <Link
+          to={`/`}
+          className="border-b-2 border-transparent hover:border-orange-500"
+        >
+          Home
+        </Link>
+        <Link
+          to={`/about`}
+          className="border-b-2 border-transparent hover:border-orange-500"
+        >
+          About
+        </Link>
         {user && (
           <button onClick={logoutUser}>Log out</button>
         )}
