@@ -7,6 +7,8 @@ import NoPage from "./pages/noPage"
 import Layout from "./pages/layout"
 import Home from "./pages/home"
 import About from "./pages/about"
+import AdminPanel from "./pages/admin"
+import AdminLogin from "./pages/admin/login"
 
 const App = () => {
   const router = createBrowserRouter([
@@ -19,8 +21,21 @@ const App = () => {
           element: <Home/>,
         },
         {
-          path: 'about',
+          path: '/about',
           element: <About/>
+        },
+        {
+          path: '/admin',
+          children: [
+            {
+              index: true,
+              element: <AdminPanel/>
+            },
+            {
+              path: 'login',
+              element: <AdminLogin/>
+            }
+          ]
         }
       ],
     },
