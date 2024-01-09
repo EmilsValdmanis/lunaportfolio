@@ -35,10 +35,18 @@ const Navbar = ({ user }) => {
         </Link>
         {user && (
           <>
-            <Link to={'/admin/upload'}>
+            <Link
+              to={'/admin/upload'}
+              className="border-b-2 border-transparent hover:border-orange-500"
+            >
               Upload
             </Link>
-            <button onClick={logoutUser}>Log out</button>
+            <button
+              onClick={logoutUser}
+              className="border-b-2 border-transparent hover:border-orange-500"
+            >
+              Log out
+            </button>
           </>
         )}
       </div>
