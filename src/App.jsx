@@ -8,6 +8,7 @@ import Layout from "./pages/layout"
 import Home from "./pages/home"
 import About from "./pages/about"
 import AdminLogin from "./pages/admin"
+import AdminUpload from "./pages/admin/upload"
 
 const App = () => {
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const App = () => {
         {
           path: '/admin/login',
           element: <AdminLogin/>
+        },
+        {
+          path: 'admin/upload',
+          element: <AdminUpload/>
         }
       ],
     },

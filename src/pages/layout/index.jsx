@@ -5,11 +5,12 @@ import Footer from "./components/Footer"
 import { Suspense } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "../../utils/firebase.utils"
+import Loading from "../../components/loading"
 
 const Layout = () => {
   const [user, loading] = useAuthState(auth)
 
-  if(loading) return null
+  if(loading) return <Loading/>
 
   return (
     <div className="flex flex-col w-screen min-h-screen">
@@ -20,7 +21,7 @@ const Layout = () => {
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet/>
         </Suspense>
-      </main>
+    </main>
       <Footer
         user={user}
       />

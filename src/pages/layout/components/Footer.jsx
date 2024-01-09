@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const Footer = ({ user }) => {
   return (
-    <div className="flex p-10 w-full bg-gray-100 font-calligraphy text-3xl justify-between">
+    <div className="flex flex-col md:flex-row items-center p-10 w-full bg-gray-100 font-calligraphy text-3xl justify-between">
       {!user && (
         <Link
           to={'/admin/login'}

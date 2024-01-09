@@ -34,7 +34,12 @@ const Navbar = ({ user }) => {
           About
         </Link>
         {user && (
-          <button onClick={logoutUser}>Log out</button>
+          <>
+            <Link to={'/admin/upload'}>
+              Upload
+            </Link>
+            <button onClick={logoutUser}>Log out</button>
+          </>
         )}
       </div>
     </div>

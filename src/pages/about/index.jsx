@@ -1,5 +1,5 @@
 import React from "react"
-import LunaImage from "../../assets/luna.png"
+import LunaImage from '../../assets/luna.jpg'
 
 const About = () => {
   return (
@@ -20,7 +20,6 @@ const About = () => {
             Two years have whisked by in a flurry of paw prints and gentle purrs. She has woven herself seamlessly into the fabric of our lives, becoming not just a pet but an irreplaceable member of our family. Her affectionate nature has warmed our hearts, turning her from a rescued treasure to the queen of our home.
           </p>
         </div>
-        
       </div>
       <div className="w-full lg:w-1/2 flex flex-col justify-center items-center">
         <img
