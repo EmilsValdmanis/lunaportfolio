@@ -20,7 +20,7 @@ const Navbar = ({ user }) => {
       >
         Luna
       </Link>
-      <div className="flex gap-8 text-4xl">
+      <div className="flex gap-8 text-2xl md:text-4xl">
         <Link
           to={`/`}
           className="border-b-2 border-transparent hover:border-orange-500"

@@ -24,16 +24,15 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 xl:gap-4 max-w-7xl m-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2 xl:gap-4 max-w-7xl m-auto">
       {allImages.map((imageUrl, index) => 
-        <img
-          src={imageUrl}
-          key={index}
-          alt={imageUrl}
-          className={`rounded-lg object-fit ${
-            Math.random() <= 0.4 ? "grid-cols-subgrid col-span-1" : "col-span-2"
-          }`}
-        />
+        <div key={index} className="rounded-xl overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={imageUrl}
+            className="w-full h-96 object-cover object-center rounded-xl"
+          />
+        </div>
       )}
     </div>
   )

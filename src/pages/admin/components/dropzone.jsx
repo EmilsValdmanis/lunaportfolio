@@ -96,7 +96,7 @@ function Dropzone() {
           >
             Upload files
           </button>
-          <div className='grid grid-cols-3 max-w-xl'>
+          <div className='grid grid-cols-3 max-w-xl gap-2'>
             {selectedFiles.map((file) => (
               <img
                 key={file.name}
