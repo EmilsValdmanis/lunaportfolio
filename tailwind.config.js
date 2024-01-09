@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'calligraphy': ['Calligraphy', 'sans-serif']
+        'calligraphy': ['Carolena Narashy', 'sans-serif']
       },
-      colors: {
+    colors: {
         gray: {
           50: '#FFFFFF',
           100: '#EFEFEF',

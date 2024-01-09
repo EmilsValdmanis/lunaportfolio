@@ -13,14 +13,14 @@ const Navbar = ({ user }) => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row px-16 py-8 w-full bg-gray-100 justify-between items-center font-calligraphy">
-      <Link
+    <div className="flex flex-col md:flex-row px-16 py-8 gap-2 w-full bg-gray-100 justify-between items-center font-calligraphy">
+    <Link
         to={`/`}
-        className="text-7xl border-b-2 border-transparent hover:border-orange-500"
+        className="text-4xl border-b-2 border-transparent hover:border-orange-500"
       >
         Luna
       </Link>
-      <div className="flex gap-8 text-2xl md:text-4xl">
+      <div className="flex gap-8 text-2xl md:text-3xl">
         <Link
           to={`/`}
           className="border-b-2 border-transparent hover:border-orange-500"
