@@ -58,6 +58,7 @@ const Home = () => {
       ) : (
         <div className="flex flex-col gap-8">
           {Object.keys(allImages)
+            .sort((a, b) => new Date(b) - new Date(a))
             .map((month, index) => (
               <div key={index}>
                 <div className="max-w-7xl m-auto flex flex-col gap-6">
