@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { ChevronUp } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ScrollButton = () => {
     const [visible, setVisible] = useState(false);
@@ -43,24 +44,25 @@ const ScrollButton = () => {
         };
     }, [toggleVisible, calculateOffset]);
 
-    if (clicked) {
-        return null;
-    }
-
     return (
-        <button
-            onClick={scrollToTop}
-            aria-label="Scroll to top"
-            className={`fixed bottom-4 right-1/2 z-50 translate-x-1/2 transform cursor-pointer rounded-full border border-gray-200 bg-gray-50 p-1 transition-opacity 2xl:bottom-8 2xl:right-8 2xl:translate-x-0 ${
-                visible ? "opacity-100" : "opacity-0"
-            }`}
-            style={{
-                transform: `translateY(-${offset}px)`,
-                transition: "transform 0.15s ease-out",
-            }}
-        >
-            <ChevronUp className="size-8" />
-        </button>
+        <AnimatePresence>
+            {visible && !clicked && (
+                <motion.button
+                    onClick={scrollToTop}
+                    aria-label="Scroll to top"
+                    className="fixed right-1/2 z-50 translate-x-1/2 transform cursor-pointer rounded-full border border-gray-200 bg-gray-50 p-1 transition-opacity 2xl:right-6 2xl:translate-x-0"
+                    initial={{ opacity: 0, bottom: "1.5rem" }}
+                    animate={{
+                        opacity: 1,
+                        bottom: `calc(1.5rem + ${offset}px)`,
+                    }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                >
+                    <ChevronUp className="size-8" />
+                </motion.button>
+            )}
+        </AnimatePresence>
     );
 };
 
