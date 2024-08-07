@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebase.utils";
 import Loading from "../../components/loading";
+import ScrollButton from "../../components/scroll-button";
 
 const Layout = () => {
     const [user, loading] = useAuthState(auth);
@@ -14,6 +15,7 @@ const Layout = () => {
         <div className="flex flex-col w-screen min-h-screen">
             <Navbar user={user} />
             <main className="grow p-10 flex flex-col bg-grey-50">
+                <ScrollButton />
                 {loading ? (
                     <Loading />
                 ) : (

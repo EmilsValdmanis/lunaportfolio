@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = ({ user }) => {
     return (
-        <div className="flex flex-col md:flex-row gap-2 items-center p-10 w-full bg-gray-100 font-calligraphy text-2xl md:text-3xl justify-between">
+        <footer className="flex flex-col md:flex-row gap-2 items-center p-10 w-full bg-gray-100 font-calligraphy text-2xl md:text-3xl justify-between">
             {!user && (
                 <Link
                     to={"/admin/login"}
@@ -15,7 +15,7 @@ const Footer = ({ user }) => {
             <p>
                 <span className="text-xl">©</span> Luna. All rights reserved
             </p>
-        </div>
+        </footer>
     );
 };
 
