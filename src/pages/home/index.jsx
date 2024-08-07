@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { storage } from "../../utils/firebase.utils";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import Loading from "../../components/loading";
+import ExpandableImage from "./expandableImage";
 
 const groupImagesByMonth = (imagesArray) =>
     imagesArray.reduce((groupedImages, image) => {
@@ -60,8 +61,8 @@ const Home = () => {
                 <div className="flex flex-col gap-8">
                     {Object.keys(allImages)
                         .sort((a, b) => new Date(b) - new Date(a))
-                        .map((month, index) => (
-                            <div key={index}>
+                        .map((month, monthIndex) => (
+                            <div key={month}>
                                 <div className="m-auto flex max-w-7xl flex-col gap-6">
                                     <h2 className="font-calligraphy text-4xl">
                                         {formatMonthTitle(month)}
@@ -73,15 +74,12 @@ const Home = () => {
                                                     new Date(b.createdAt) -
                                                     new Date(a.createdAt),
                                             )
-                                            .map((image, index) => (
+                                            .map((image, imageIndex) => (
                                                 <div
-                                                    key={index}
-                                                    className="transform overflow-hidden rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+                                                    key={`${month}-${imageIndex}`}
                                                 >
-                                                    <img
-                                                        src={image.url}
-                                                        alt={image.name}
-                                                        className="h-96 w-full object-cover object-center"
+                                                    <ExpandableImage
+                                                        image={image}
                                                     />
                                                 </div>
                                             ))}
