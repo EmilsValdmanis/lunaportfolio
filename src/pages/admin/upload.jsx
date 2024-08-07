@@ -3,7 +3,7 @@ import Dropzone from "./components/dropzone";
 
 const AdminUpload = () => {
     return (
-        <div className="grow flex flex-col w-full max-w-7xl mx-auto justify-center">
+        <div className="mx-auto flex w-full max-w-7xl grow flex-col justify-center">
             <Dropzone />
         </div>
     );

@@ -12,9 +12,9 @@ const Layout = () => {
     const [user, loading] = useAuthState(auth);
 
     return (
-        <div className="flex flex-col w-screen min-h-screen">
+        <div className="flex min-h-screen w-screen flex-col">
             <Navbar user={user} />
-            <main className="grow p-10 flex flex-col bg-grey-50">
+            <main className="bg-grey-50 flex grow flex-col p-10">
                 <ScrollButton />
                 {loading ? (
                     <Loading />

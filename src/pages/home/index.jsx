@@ -62,11 +62,11 @@ const Home = () => {
                         .sort((a, b) => new Date(b) - new Date(a))
                         .map((month, index) => (
                             <div key={index}>
-                                <div className="max-w-7xl m-auto flex flex-col gap-6">
-                                    <h2 className="text-4xl font-calligraphy">
+                                <div className="m-auto flex max-w-7xl flex-col gap-6">
+                                    <h2 className="font-calligraphy text-4xl">
                                         {formatMonthTitle(month)}
                                     </h2>
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                                         {allImages[month]
                                             .sort(
                                                 (a, b) =>
@@ -76,12 +76,12 @@ const Home = () => {
                                             .map((image, index) => (
                                                 <div
                                                     key={index}
-                                                    className="rounded-xl overflow-hidden shadow hover:shadow-xl transition-transform transform duration-300 hover:scale-105"
+                                                    className="transform overflow-hidden rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-xl"
                                                 >
                                                     <img
                                                         src={image.url}
                                                         alt={image.name}
-                                                        className="w-full h-96 object-cover object-center"
+                                                        className="h-96 w-full object-cover object-center"
                                                     />
                                                 </div>
                                             ))}

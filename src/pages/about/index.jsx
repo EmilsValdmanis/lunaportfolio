@@ -3,7 +3,7 @@ import LunaImage from "../../assets/luna.jpg";
 
 const About = () => {
     return (
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:gap-16">
             <div className="w-full lg:w-1/2">
                 <h1 className="font-calligraphy text-7xl">
                     About our little Luna
@@ -73,7 +73,7 @@ const About = () => {
                     </p>
                 </div>
             </div>
-            <div className="w-full lg:w-1/2 flex flex-col justify-center items-center">
+            <div className="flex w-full flex-col items-center justify-center lg:w-1/2">
                 <img
                     src={LunaImage}
                     alt="Luna"

@@ -79,15 +79,15 @@ function Dropzone() {
     if (isUploading) return <Loading />;
 
     return (
-        <div className="w-full flex flex-col gap-10 items-center justify-center">
+        <div className="flex w-full flex-col items-center justify-center gap-10">
             <div
                 {...getRootProps()}
-                className="p-10 bg-gray-100 rounded-2xl w-full max-w-xl flex flex-col items-center gap-2"
+                className="flex w-full max-w-xl flex-col items-center gap-2 rounded-2xl bg-gray-100 p-10"
             >
                 <img
                     src={CloudImage}
                     alt="Upload"
-                    className="w-16 h-16 opacity-70 text-orange-500"
+                    className="h-16 w-16 text-orange-500 opacity-70"
                 />
                 <input {...getInputProps()} />
                 <div className="text-extrabold">
@@ -107,12 +107,12 @@ function Dropzone() {
             {selectedFiles.length > 0 && (
                 <>
                     <button
-                        className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center"
+                        className="w-full rounded-lg bg-orange-500 px-10 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-300 sm:w-auto"
                         onClick={UploadAllFiles}
                     >
                         Upload files
                     </button>
-                    <div className="grid grid-cols-3 max-w-xl gap-2">
+                    <div className="grid max-w-xl grid-cols-3 gap-2">
                         {selectedFiles.map((file) => (
                             <img
                                 key={file.name}

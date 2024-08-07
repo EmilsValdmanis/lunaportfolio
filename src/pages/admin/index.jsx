@@ -26,7 +26,7 @@ const AdminLogin = () => {
     }
 
     return (
-        <form className="p-10 bg-gray-100 w-full max-w-md rounded-3xl flex flex-col gap-4 m-auto shadow-lg">
+        <form className="m-auto flex w-full max-w-md flex-col gap-4 rounded-3xl bg-gray-100 p-10 shadow-lg">
             {notice && <p className="text-orange-500">{notice}</p>}
             <input
                 type="email"
@@ -34,7 +34,7 @@ const AdminLogin = () => {
                 autoComplete="username"
                 placeholder="Username"
                 value={email}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 focus:outline-none focus:ring-0"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-orange-500 focus:outline-none focus:ring-0 focus:ring-orange-500"
                 onChange={(e) => setEmail(e.target.value)}
             />
             <input
@@ -43,12 +43,12 @@ const AdminLogin = () => {
                 autoComplete="current-password"
                 placeholder="Password"
                 value={password}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 focus:outline-none focus:ring-0"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-orange-500 focus:outline-none focus:ring-0 focus:ring-orange-500"
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button
                 onClick={login}
-                className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                className="w-full rounded-lg bg-orange-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-300 sm:w-auto"
             >
                 Submit
             </button>
