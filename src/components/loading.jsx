@@ -1,14 +1,11 @@
-import ReactLoading from 'react-loading'
+import ReactLoading from "react-loading";
 
 const Loading = () => {
-  return (
-    <div className='w-full flex justify-center'>
-      <ReactLoading
-        type={'spin'}
-        color='#F69329'
-      />
-    </div>
-  )
-}
+    return (
+        <div className="w-full flex justify-center">
+            <ReactLoading type={"spin"} color="#F69329" />
+        </div>
+    );
+};
 
-export default Loading
+export default Loading;

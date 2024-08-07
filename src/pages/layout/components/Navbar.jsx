@@ -1,57 +1,57 @@
-import React from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { auth } from "../../../utils/firebase.utils"
-import { signOut } from "firebase/auth"
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../../utils/firebase.utils";
+import { signOut } from "firebase/auth";
 
 const Navbar = ({ user }) => {
-  const navigate = useNavigate()
+    const navigate = useNavigate();
 
-  const logoutUser = async (e) => {
-    e.preventDefault()
-    await signOut(auth)
-    navigate("/")
-  }
+    const logoutUser = async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+        navigate("/");
+    };
 
-  return (
-    <div className="flex flex-col md:flex-row px-16 py-8 gap-2 w-full bg-gray-100 justify-between items-center font-calligraphy">
-    <Link
-        to={`/`}
-        className="text-4xl border-b-2 border-transparent hover:border-orange-500"
-      >
-        Luna
-      </Link>
-      <div className="flex gap-8 text-2xl md:text-3xl">
-        <Link
-          to={`/`}
-          className="border-b-2 border-transparent hover:border-orange-500"
-        >
-          Home
-        </Link>
-        <Link
-          to={`/about`}
-          className="border-b-2 border-transparent hover:border-orange-500"
-        >
-          About
-        </Link>
-        {user && (
-          <>
+    return (
+        <div className="flex flex-col md:flex-row px-16 py-8 gap-2 w-full bg-gray-100 justify-between items-center font-calligraphy">
             <Link
-              to={'/admin/upload'}
-              className="border-b-2 border-transparent hover:border-orange-500"
+                to={`/`}
+                className="text-4xl border-b-2 border-transparent hover:border-orange-500"
             >
-              Upload
+                Luna
             </Link>
-            <button
-              onClick={logoutUser}
-              className="border-b-2 border-transparent hover:border-orange-500"
-            >
-              Log out
-            </button>
-          </>
-        )}
-      </div>
-    </div>
-  )
-}
+            <div className="flex gap-8 text-2xl md:text-3xl">
+                <Link
+                    to={`/`}
+                    className="border-b-2 border-transparent hover:border-orange-500"
+                >
+                    Home
+                </Link>
+                <Link
+                    to={`/about`}
+                    className="border-b-2 border-transparent hover:border-orange-500"
+                >
+                    About
+                </Link>
+                {user && (
+                    <>
+                        <Link
+                            to={"/admin/upload"}
+                            className="border-b-2 border-transparent hover:border-orange-500"
+                        >
+                            Upload
+                        </Link>
+                        <button
+                            onClick={logoutUser}
+                            className="border-b-2 border-transparent hover:border-orange-500"
+                        >
+                            Log out
+                        </button>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+};
 
-export default Navbar
+export default Navbar;
