@@ -13,7 +13,7 @@ const Layout = () => {
     return (
         <div className="flex flex-col w-screen min-h-screen">
             <Navbar user={user} />
-            <main className="grow p-10 flex flex-col shadow-inner bg-grey-50">
+            <main className="grow p-10 flex flex-col bg-grey-50">
                 {loading ? (
                     <Loading />
                 ) : (
