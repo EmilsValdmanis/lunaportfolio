@@ -1,15 +1,26 @@
 import React from "react";
+import { motion } from "framer-motion";
 import LunaImage from "../../assets/luna.jpg";
 
 const About = () => {
     return (
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:gap-16">
-            <div className="w-full lg:w-1/2">
-                <h1 className="font-calligraphy text-7xl">
+        <div className="mx-auto flex h-full max-w-7xl flex-col gap-8 lg:flex-row lg:gap-16">
+            <motion.div className="w-full lg:w-1/2">
+                <motion.h1
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="mb-8 font-calligraphy text-7xl text-gray-800"
+                >
                     About our little Luna
-                </h1>
-                <div className="flex flex-col gap-4 py-8 text-lg">
-                    <p>
+                </motion.h1>
+                <div className="flex h-full flex-col gap-4 py-4 text-lg">
+                    <motion.p
+                        className="text-lg leading-relaxed"
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0, duration: 0.6 }}
+                    >
                         Meet the enchanting furball that stole our hearts – our
                         beloved{" "}
                         <span className="text-orange-500">
@@ -23,8 +34,13 @@ const About = () => {
                         tender age of two months, she entered our lives with a
                         spirited energy that hinted at her adventurous
                         beginnings.
-                    </p>
-                    <p>
+                    </motion.p>
+                    <motion.p
+                        className="text-lg leading-relaxed"
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3, duration: 0.6 }}
+                    >
                         Initially, our dear cat was a wild sprite, a testament
                         to her early days navigating the rustic charm of a barn.
                         Yet, as the days unfolded, so did the layers of her
@@ -34,8 +50,13 @@ const About = () => {
                         has been nothing short of magical. With each passing
                         moment, she gracefully unveiled the most heartwarming
                         facets of her being.
-                    </p>
-                    <p>
+                    </motion.p>
+                    <motion.p
+                        className="text-lg leading-relaxed"
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6, duration: 0.6 }}
+                    >
                         Flipping through the pages of time, we're reminded of
                         the first days when she tentatively explored her new
                         home, every nook and cranny sparking her curiosity. The
@@ -44,8 +65,13 @@ const About = () => {
                             black coat adorned with splashes of white and orange
                         </span>
                         , a palette as unique as the bond we've forged.
-                    </p>
-                    <p>
+                    </motion.p>
+                    <motion.p
+                        className="text-lg leading-relaxed"
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.9, duration: 0.6 }}
+                    >
                         Two years have whisked by in a flurry of paw prints and
                         gentle purrs. She has woven herself seamlessly into the
                         fabric of our lives, becoming not just a pet but an
@@ -57,8 +83,13 @@ const About = () => {
                         treasure to the queen of our home. She has an uncanny
                         ability to brighten even the gloomiest days with her
                         playful antics and soothing purrs.
-                    </p>
-                    <p>
+                    </motion.p>
+                    <motion.p
+                        className="text-lg leading-relaxed"
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.2, duration: 0.6 }}
+                    >
                         Her presence is a source of comfort, and her
                         companionship is a daily reminder of the joy and love
                         that a furry friend can bring into our lives. From lazy
@@ -70,16 +101,21 @@ const About = () => {
                             feline companion
                         </span>
                         .
-                    </p>
+                    </motion.p>
                 </div>
-            </div>
-            <div className="flex w-full flex-col items-center justify-center lg:w-1/2">
+            </motion.div>
+            <motion.div
+                className="flex w-full flex-col items-center justify-center lg:w-1/2"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+            >
                 <img
                     src={LunaImage}
                     alt="Luna"
-                    className="w-full max-w-xl rounded-xl"
+                    className="w-full max-w-xl rounded-xl shadow-lg"
                 />
-            </div>
+            </motion.div>
         </div>
     );
 };
