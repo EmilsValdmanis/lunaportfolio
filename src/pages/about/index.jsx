@@ -10,7 +10,7 @@ const About = () => {
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="mb-8 font-calligraphy text-7xl text-gray-800"
+                    className="mb-8 font-calligraphy text-7xl"
                 >
                     About our little Luna
                 </motion.h1>
