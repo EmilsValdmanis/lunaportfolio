@@ -68,6 +68,7 @@ export default function ExpandableImage({ image }) {
                             </motion.button>
                             <motion.div layoutId={`image-${active.name}-${id}`}>
                                 <motion.img
+                                    loading="lazy"
                                     src={active.url}
                                     alt={active.name}
                                     className="h-full max-h-[720px] w-full rounded-xl object-contain md:max-h-[1080px]"
@@ -106,6 +107,7 @@ export default function ExpandableImage({ image }) {
             >
                 <motion.div layoutId={`image-${image.name}-${id}`}>
                     <motion.img
+                        loading="lazy"
                         src={image.url}
                         alt={image.name}
                         className="h-96 w-full rounded-lg object-cover object-center"
