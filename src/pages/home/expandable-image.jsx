@@ -81,7 +81,7 @@ export default function ExpandableImage({ image }) {
                 layoutId={`card-${image.name}-${id}`}
                 key={image.name}
                 onClick={() => setActive(image)}
-                className="cursor-pointer overflow-hidden rounded-xl"
+                className="cursor-pointer overflow-hidden rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500"
                 whileHover={{
                     borderRadius: "24px",
                     scale: 1.05,
@@ -93,6 +93,7 @@ export default function ExpandableImage({ image }) {
                     },
                 }}
                 whileTap={{ scale: 0.95 }}
+                whileFocus={{ scale: 0.95 }}
             >
                 <motion.div layoutId={`image-${image.name}-${id}`}>
                     <motion.img
