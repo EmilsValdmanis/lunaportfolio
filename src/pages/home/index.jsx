@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { storage } from "../../utils/firebase.utils";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import Loading from "../../components/loading";
-import ExpandableImage from "./expandableImage";
+import ExpandableImage from "./expandable-image";
 
 const groupImagesByMonth = (imagesArray) =>
     imagesArray.reduce((groupedImages, image) => {
