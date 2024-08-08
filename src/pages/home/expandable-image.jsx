@@ -82,12 +82,23 @@ export default function ExpandableImage({ image }) {
                 key={image.name}
                 onClick={() => setActive(image)}
                 className="cursor-pointer overflow-hidden rounded-xl"
+                whileHover={{
+                    borderRadius: "24px",
+                    scale: 1.05,
+                    transition: {
+                        duration: 0.5,
+                        ease: "easeInOut",
+                        type: "spring",
+                        stiffness: 300,
+                    },
+                }}
+                whileTap={{ scale: 0.95 }}
             >
                 <motion.div layoutId={`image-${image.name}-${id}`}>
                     <motion.img
                         src={image.url}
                         alt={image.name}
-                        className="h-96 w-full object-cover object-center"
+                        className="h-96 w-full rounded-lg object-cover object-center"
                     />
                 </motion.div>
             </motion.div>
