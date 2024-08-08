@@ -45,7 +45,7 @@ export default function ExpandableImage({ image }) {
                         <motion.div
                             layoutId={`card-${active.name}-${id}`}
                             ref={ref}
-                            className="relative"
+                            className="relative max-h-full"
                         >
                             <motion.button
                                 initial={{
@@ -75,7 +75,7 @@ export default function ExpandableImage({ image }) {
                                         boxShadow:
                                             "0px 10px 30px rgba(0, 0, 0, 0.3)",
                                     }}
-                                    className="h-full max-h-[720px] w-full rounded-3xl object-contain md:max-h-[1080px]"
+                                    className="h-[85vh] w-auto rounded-3xl object-cover object-center"
                                 />
                             </motion.div>
                         </motion.div>
