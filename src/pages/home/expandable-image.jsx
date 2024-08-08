@@ -50,9 +50,19 @@ export default function ExpandableImage({ image }) {
                             <motion.button
                                 initial={{
                                     opacity: 0,
+                                    rotate: -15,
+                                    y: -10,
+                                    x: "-100%",
                                 }}
                                 animate={{
                                     opacity: 1,
+                                    rotate: 0,
+                                    y: 0,
+                                    x: "100%",
+                                    transition: {
+                                        stiffness: 300,
+                                        damping: 10,
+                                    },
                                 }}
                                 exit={{
                                     opacity: 0,
@@ -60,9 +70,18 @@ export default function ExpandableImage({ image }) {
                                         duration: 0.2,
                                     },
                                 }}
+                                whileHover={{
+                                    scale: 1.1,
+                                    rotate: [0, 10, -10, 10, 0],
+                                    transition: {
+                                        duration: 0.5,
+                                    },
+                                }}
+                                whileTap={{ scale: 0.8 }}
                                 key={`button-${active.name}-${id}`}
-                                className="absolute -right-2 top-0 hidden translate-x-full rounded-full p-2 shadow backdrop-blur supports-[backdrop-filter]:bg-white/30 md:block"
+                                className="absolute right-0 top-0 -mr-2 rounded-full p-2 shadow backdrop-blur supports-[backdrop-filter]:bg-white/30 md:block"
                                 onClick={() => setActive(null)}
+                                style={{ pointerEvents: "auto" }}
                             >
                                 <X className="size-6" />
                             </motion.button>
