@@ -94,6 +94,15 @@ export default function ExpandableImage({ image }) {
                 }}
                 whileTap={{ scale: 0.95 }}
                 whileFocus={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ margin: "-100px", once: true }}
+                transition={{
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                }}
             >
                 <motion.div layoutId={`image-${image.name}-${id}`}>
                     <motion.img
