@@ -61,7 +61,7 @@ export default function ExpandableImage({ image }) {
                                     },
                                 }}
                                 key={`button-${active.name}-${id}`}
-                                className="absolute -right-2 top-0 hidden translate-x-full rounded-full bg-white p-2 md:block"
+                                className="absolute -right-2 top-0 hidden translate-x-full rounded-full p-2 shadow backdrop-blur supports-[backdrop-filter]:bg-white/30 md:block"
                                 onClick={() => setActive(null)}
                             >
                                 <X className="size-6" />
@@ -71,7 +71,11 @@ export default function ExpandableImage({ image }) {
                                     loading="lazy"
                                     src={active.url}
                                     alt={active.name}
-                                    className="h-full max-h-[720px] w-full rounded-xl object-contain md:max-h-[1080px]"
+                                    style={{
+                                        boxShadow:
+                                            "0px 10px 30px rgba(0, 0, 0, 0.3)",
+                                    }}
+                                    className="h-full max-h-[720px] w-full rounded-3xl object-contain md:max-h-[1080px]"
                                 />
                             </motion.div>
                         </motion.div>
@@ -82,10 +86,12 @@ export default function ExpandableImage({ image }) {
                 layoutId={`card-${image.name}-${id}`}
                 key={image.name}
                 onClick={() => setActive(image)}
-                className="cursor-pointer overflow-hidden rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="cursor-pointer overflow-hidden rounded-xl outline-orange-500"
                 whileHover={{
                     borderRadius: "24px",
+                    rotate: 0.3,
                     scale: 1.05,
+                    boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.3)",
                     transition: {
                         duration: 0.5,
                         ease: "easeInOut",
@@ -98,12 +104,6 @@ export default function ExpandableImage({ image }) {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ margin: "-100px", once: true }}
-                transition={{
-                    duration: 0.5,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20,
-                }}
             >
                 <motion.div layoutId={`image-${image.name}-${id}`}>
                     <motion.img
