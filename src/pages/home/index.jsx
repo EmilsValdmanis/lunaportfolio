@@ -15,6 +15,7 @@ import {
     endOfYear,
 } from "date-fns";
 import { ChevronLeft, ChevronRight, X, CalendarArrowDown } from "lucide-react";
+import { useOutsideClick } from "../../hooks/use-outside-click";
 
 const groupImagesByMonth = (imagesArray) => {
     const grouped = imagesArray.reduce((acc, image) => {
@@ -55,6 +56,9 @@ const Home = () => {
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(null);
     const monthRefs = useRef({});
+    const dialogRef = useRef(null);
+
+    useOutsideClick(dialogRef, () => setDialogOpen(false));
 
     const fetchImages = async () => {
         try {
@@ -139,7 +143,10 @@ const Home = () => {
 
             {dialogOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                    <div className="flex flex-col gap-6 rounded-xl bg-gray-400 bg-opacity-30 bg-clip-padding p-6 shadow-lg backdrop-blur-md backdrop-filter">
+                    <div
+                        className="flex flex-col gap-6 rounded-xl bg-gray-400 bg-opacity-30 bg-clip-padding p-6 shadow-lg backdrop-blur-md backdrop-filter"
+                        ref={dialogRef}
+                    >
                         <div className="flex items-center justify-between">
                             <button
                                 className="cursor-pointer rounded-xl bg-gray-200 bg-opacity-10 bg-clip-padding p-2 text-white shadow-lg backdrop-blur-md backdrop-filter"
@@ -222,7 +229,7 @@ const Home = () => {
                                 },
                             }}
                             whileTap={{ scale: 0.8 }}
-                            className="absolute right-0 top-0 -mr-2 cursor-pointer rounded-full bg-gray-200 bg-opacity-20 bg-clip-padding p-2 shadow-lg backdrop-blur-md backdrop-filter md:block"
+                            className="absolute right-0 top-0 -mr-2 hidden cursor-pointer rounded-full bg-gray-200 bg-opacity-20 bg-clip-padding p-2 shadow-lg backdrop-blur-md backdrop-filter sm:block"
                             onClick={() => setDialogOpen(false)}
                             style={{ pointerEvents: "auto" }}
                         >
