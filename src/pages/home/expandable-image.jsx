@@ -123,7 +123,6 @@ export default function ExpandableImage({ image }) {
                 initial={{ opacity: 1, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ margin: "-75px", once: true }}
-                transition={{ duration: 0.4 }}
             >
                 <motion.div layoutId={`image-${image.name}-${id}`}>
                     <motion.img
