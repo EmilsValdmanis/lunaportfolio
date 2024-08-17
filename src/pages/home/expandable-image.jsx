@@ -94,7 +94,7 @@ export default function ExpandableImage({ image }) {
                                         boxShadow:
                                             "0px 10px 30px rgba(0, 0, 0, 0.3)",
                                     }}
-                                    className="h-[85vh] w-auto rounded-3xl object-cover object-center"
+                                    className="max-h-[85vh] w-full rounded-3xl object-cover object-center"
                                 />
                             </motion.div>
                         </motion.div>
