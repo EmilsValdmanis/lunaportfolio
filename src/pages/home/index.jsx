@@ -3,6 +3,7 @@ import { storage } from "../../utils/firebase.utils";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import Loading from "../../components/loading";
 import ExpandableImage from "./expandable-image";
+import ProgressBar from "./scroll-progress";
 
 const groupImagesByMonth = (imagesArray) =>
     imagesArray.reduce((groupedImages, image) => {
@@ -59,6 +60,7 @@ const Home = () => {
                 <Loading type="spin" color="#000" height={50} width={50} />
             ) : (
                 <div className="flex flex-col gap-8">
+                    <ProgressBar />
                     {Object.keys(allImages)
                         .sort((a, b) => new Date(b) - new Date(a))
                         .map((month, monthIndex) => (
