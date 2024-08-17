@@ -14,7 +14,7 @@ import {
     startOfYear,
     endOfYear,
 } from "date-fns";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, CalendarArrowDown } from "lucide-react";
 
 const groupImagesByMonth = (imagesArray) => {
     const grouped = imagesArray.reduce((acc, image) => {
@@ -53,6 +53,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const [selectedMonth, setSelectedMonth] = useState(null);
     const monthRefs = useRef({});
 
     const fetchImages = async () => {
@@ -114,6 +115,7 @@ const Home = () => {
                                     className="cursor-pointer font-calligraphy text-4xl"
                                     onClick={() => {
                                         setDialogOpen(true);
+                                        setSelectedMonth(month);
                                     }}
                                 >
                                     {formatMonthTitle(month)}
@@ -166,9 +168,11 @@ const Home = () => {
                                 return (
                                     <div
                                         key={monthKey}
-                                        className={`cursor-pointer rounded-xl p-3 text-white shadow-lg backdrop-blur-md backdrop-filter ${
+                                        className={`flex items-center gap-2 rounded-xl p-3 text-white shadow-lg backdrop-blur-md backdrop-filter ${
                                             hasImages
-                                                ? "bg-gray-200 bg-opacity-10"
+                                                ? monthKey === selectedMonth
+                                                    ? "cursor-pointer bg-gray-50 bg-opacity-30"
+                                                    : "cursor-pointer bg-gray-200 bg-opacity-10"
                                                 : "cursor-not-allowed opacity-50"
                                         }`}
                                         onClick={() => {
@@ -179,6 +183,10 @@ const Home = () => {
                                         }}
                                     >
                                         {format(date, "MMMM")}
+                                        {monthKey ===
+                                            format(new Date(), "yyyy-MM") && (
+                                            <CalendarArrowDown className="absolute right-2 top-2 size-4" />
+                                        )}
                                     </div>
                                 );
                             })}
