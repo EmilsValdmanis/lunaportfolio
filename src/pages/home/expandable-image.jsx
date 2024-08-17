@@ -79,7 +79,7 @@ export default function ExpandableImage({ image }) {
                                 }}
                                 whileTap={{ scale: 0.8 }}
                                 key={`button-${active.name}-${id}`}
-                                className="absolute right-0 top-0 -mr-2 rounded-full p-2 shadow backdrop-blur supports-[backdrop-filter]:bg-white/30 md:block"
+                                className="absolute right-0 top-0 -mr-2 rounded-full bg-gray-200 bg-opacity-20 p-2 shadow-lg backdrop-blur-md md:block"
                                 onClick={() => setActive(null)}
                                 style={{ pointerEvents: "auto" }}
                             >
