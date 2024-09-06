@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { storage } from "../../utils/firebase.utils";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import Loading from "../../components/loading";
@@ -14,7 +14,7 @@ import {
     startOfYear,
     endOfYear,
 } from "date-fns";
-import { ChevronLeft, ChevronRight, X, CalendarArrowDown } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useOutsideClick } from "../../hooks/use-outside-click";
 
 const groupImagesByMonth = (imagesArray) => {
@@ -55,6 +55,7 @@ const Home = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(null);
+    const [randomImages, setRandomImages] = useState([]);
     const monthRefs = useRef({});
     const dialogRef = useRef(null);
 
@@ -84,6 +85,19 @@ const Home = () => {
     useEffect(() => {
         fetchImages();
     }, []);
+
+    useEffect(() => {
+        if (dialogOpen) {
+            getRandomImages();
+        }
+    }, [dialogOpen]);
+
+    const getRandomImages = () => {
+        const allImagesArray = Object.values(allImages).flat();
+        const shuffled = allImagesArray.sort(() => 0.5 - Math.random());
+        const selectedImages = shuffled.slice(0, 9);
+        setRandomImages(selectedImages);
+    };
 
     const scrollToMonth = (month) => {
         if (monthRefs.current[month]) {
@@ -115,15 +129,32 @@ const Home = () => {
                             ref={(el) => (monthRefs.current[month] = el)}
                         >
                             <div className="m-auto flex max-w-7xl flex-col gap-6">
-                                <h2
-                                    className="cursor-pointer font-calligraphy text-4xl"
+                                <motion.h2
+                                    className="w-fit cursor-pointer font-calligraphy text-4xl"
+                                    initial={{ y: 50 }}
+                                    animate={{ y: 0 }}
+                                    transition={{
+                                        duration: 0.5,
+                                        ease: "easeInOut",
+                                        type: "spring",
+                                        stiffness: 100,
+                                    }}
+                                    whileHover={{
+                                        scale: 1.1,
+                                        rotate: [0, 5, -5, 5, 0],
+                                        transition: {
+                                            type: "spring",
+                                            stiffness: 300,
+                                            damping: 10,
+                                        },
+                                    }}
                                     onClick={() => {
                                         setDialogOpen(true);
                                         setSelectedMonth(month);
                                     }}
                                 >
                                     {formatMonthTitle(month)}
-                                </h2>
+                                </motion.h2>
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                                     {allImages[month].map(
                                         (image, imageIndex) => (
@@ -140,104 +171,143 @@ const Home = () => {
                     ))}
                 </div>
             )}
-
-            {dialogOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                    <div
-                        className="flex flex-col gap-6 rounded-xl bg-gray-400 bg-opacity-30 bg-clip-padding p-6 shadow-lg backdrop-blur-md backdrop-filter"
-                        ref={dialogRef}
+            <AnimatePresence>
+                {dialogOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center"
+                        style={{
+                            backgroundImage: `url(${randomImages[0]?.url || ""})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                        }}
                     >
-                        <div className="flex items-center justify-between">
-                            <button
-                                className="cursor-pointer rounded-xl bg-gray-200 bg-opacity-10 bg-clip-padding p-2 text-white shadow-lg backdrop-blur-md backdrop-filter"
-                                onClick={() =>
-                                    setSelectedYear(selectedYear - 1)
-                                }
-                            >
-                                <ChevronLeft />
-                            </button>
-                            <span className="text-xl font-bold text-white">
-                                {selectedYear}
-                            </span>
-                            <button
-                                className="cursor-pointer rounded-xl bg-gray-200 bg-opacity-10 bg-clip-padding p-2 text-white shadow-lg backdrop-blur-md backdrop-filter"
-                                onClick={() =>
-                                    setSelectedYear(selectedYear + 1)
-                                }
-                            >
-                                <ChevronRight />
-                            </button>
-                        </div>
-                        <div className="grid grid-cols-3 gap-3">
-                            {monthsOfYear.map((date) => {
-                                const monthKey = format(date, "yyyy-MM");
-                                const hasImages = allImages[monthKey];
-                                return (
-                                    <div
-                                        key={monthKey}
-                                        className={`flex items-center gap-2 rounded-xl p-3 text-white shadow-lg backdrop-blur-md backdrop-filter ${
-                                            hasImages
-                                                ? monthKey === selectedMonth
-                                                    ? "cursor-pointer bg-gray-50 bg-opacity-30"
-                                                    : "cursor-pointer bg-gray-200 bg-opacity-10"
-                                                : "cursor-not-allowed opacity-50"
-                                        }`}
-                                        onClick={() => {
-                                            if (hasImages) {
-                                                scrollToMonth(monthKey);
-                                                setDialogOpen(false);
-                                            }
-                                        }}
-                                    >
-                                        {format(date, "MMMM")}
-                                        {monthKey ===
-                                            format(new Date(), "yyyy-MM") && (
-                                            <CalendarArrowDown className="absolute right-2 top-2 size-4" />
-                                        )}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                        <motion.button
-                            initial={{
-                                opacity: 0,
-                                rotate: -15,
-                                y: -10,
-                                x: "-100%",
+                        <motion.div className="absolute inset-0 bg-black/50" />
+                        <motion.div
+                            className="relative z-10 flex flex-col gap-6 rounded-xl bg-gray-400/30 bg-clip-padding p-6 shadow-lg backdrop-blur-md backdrop-filter"
+                            ref={dialogRef}
+                            initial={{ y: 50, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: 50, opacity: 0 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 100,
+                                damping: 20,
+                                delay: 0.3,
                             }}
-                            animate={{
-                                opacity: 1,
-                                rotate: 0,
-                                y: 0,
-                                x: "100%",
-                                transition: {
-                                    stiffness: 300,
-                                    damping: 10,
-                                },
-                            }}
-                            exit={{
-                                opacity: 0,
-                                transition: {
-                                    duration: 0.2,
-                                },
-                            }}
-                            whileHover={{
-                                scale: 1.1,
-                                rotate: [0, 10, -10, 10, 0],
-                                transition: {
-                                    duration: 0.5,
-                                },
-                            }}
-                            whileTap={{ scale: 0.8 }}
-                            className="absolute right-0 top-0 -mr-2 hidden cursor-pointer rounded-full bg-gray-200 bg-opacity-20 bg-clip-padding p-2 shadow-lg backdrop-blur-md backdrop-filter sm:block"
-                            onClick={() => setDialogOpen(false)}
-                            style={{ pointerEvents: "auto" }}
                         >
-                            <X className="size-6" />
-                        </motion.button>
-                    </div>
-                </div>
-            )}
+                            <div className="flex items-center justify-between">
+                                <motion.button
+                                    className="cursor-pointer rounded-xl bg-gray-200 bg-opacity-10 bg-clip-padding p-2 text-white shadow-lg backdrop-blur-md backdrop-filter"
+                                    onClick={() =>
+                                        setSelectedYear(selectedYear - 1)
+                                    }
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                >
+                                    <ChevronLeft />
+                                </motion.button>
+                                <span className="text-xl font-bold text-white">
+                                    {selectedYear}
+                                </span>
+                                <motion.button
+                                    className="cursor-pointer rounded-xl bg-gray-200 bg-opacity-10 bg-clip-padding p-2 text-white shadow-lg backdrop-blur-md backdrop-filter"
+                                    onClick={() =>
+                                        setSelectedYear(selectedYear + 1)
+                                    }
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                >
+                                    <ChevronRight />
+                                </motion.button>
+                            </div>
+                            <div className="grid grid-cols-3 gap-3">
+                                {monthsOfYear.map((date) => {
+                                    const monthKey = format(date, "yyyy-MM");
+                                    const hasImages = allImages[monthKey];
+                                    return (
+                                        <motion.div
+                                            key={monthKey}
+                                            className={`flex items-center gap-2 rounded-xl p-3 text-white shadow-lg backdrop-blur-md backdrop-filter ${
+                                                hasImages
+                                                    ? monthKey === selectedMonth
+                                                        ? "cursor-pointer bg-gray-50 bg-opacity-30"
+                                                        : "cursor-pointer bg-gray-200 bg-opacity-10"
+                                                    : "cursor-not-allowed opacity-50"
+                                            }`}
+                                            onClick={() => {
+                                                if (hasImages) {
+                                                    scrollToMonth(monthKey);
+                                                    setDialogOpen(false);
+                                                }
+                                            }}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{
+                                                delay:
+                                                    0.05 *
+                                                    monthsOfYear.indexOf(date),
+                                                duration: 0.3,
+                                            }}
+                                            whileHover={{
+                                                scale: hasImages ? 1.05 : 1,
+                                                transition: {
+                                                    type: "spring",
+                                                    stiffness: 200,
+                                                },
+                                            }}
+                                        >
+                                            {format(date, "MMMM")}
+                                            {monthKey ===
+                                                format(
+                                                    new Date(),
+                                                    "yyyy-MM",
+                                                ) && (
+                                                <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-xs opacity-70">
+                                                    current
+                                                </span>
+                                            )}
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                            <motion.button
+                                initial={{
+                                    opacity: 0,
+                                    rotate: -15,
+                                    y: -10,
+                                    x: "-100%",
+                                }}
+                                animate={{
+                                    opacity: 1,
+                                    rotate: 0,
+                                    y: 0,
+                                    x: "100%",
+                                    transition: { stiffness: 300, damping: 10 },
+                                }}
+                                exit={{
+                                    opacity: 0,
+                                    transition: { duration: 0.2 },
+                                }}
+                                whileHover={{
+                                    scale: 1.1,
+                                    rotate: [0, 10, -10, 10, 0],
+                                    transition: { duration: 0.5 },
+                                }}
+                                whileTap={{ scale: 0.8 }}
+                                className="absolute right-0 top-0 -mr-2 hidden cursor-pointer rounded-full bg-gray-200 bg-opacity-20 bg-clip-padding p-2 shadow-lg backdrop-blur-md backdrop-filter sm:block"
+                                onClick={() => setDialogOpen(false)}
+                                style={{ pointerEvents: "auto" }}
+                            >
+                                <X className="size-6" />
+                            </motion.button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

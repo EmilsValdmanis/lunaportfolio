@@ -5,8 +5,17 @@ import { X } from "lucide-react";
 
 export default function ExpandableImage({ image }) {
     const [active, setActive] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const id = useId();
     const ref = useRef(null);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     useEffect(() => {
         function onKeyDown(event) {
@@ -27,6 +36,12 @@ export default function ExpandableImage({ image }) {
 
     useOutsideClick(ref, () => setActive(null));
 
+    const handleImageClick = () => {
+        if (isMobile) {
+            setActive(null);
+        }
+    };
+
     return (
         <>
             <AnimatePresence>
@@ -36,6 +51,7 @@ export default function ExpandableImage({ image }) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-50 h-full w-full bg-black/50"
+                        onClick={handleImageClick}
                     />
                 )}
             </AnimatePresence>
@@ -85,7 +101,10 @@ export default function ExpandableImage({ image }) {
                             >
                                 <X className="size-6" />
                             </motion.button>
-                            <motion.div layoutId={`image-${active.name}-${id}`}>
+                            <motion.div
+                                layoutId={`image-${active.name}-${id}`}
+                                onClick={handleImageClick}
+                            >
                                 <motion.img
                                     loading="lazy"
                                     src={active.url}
@@ -122,7 +141,7 @@ export default function ExpandableImage({ image }) {
                 whileFocus={{ scale: 0.95 }}
                 initial={{ opacity: 1, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ margin: "-75px", once: true }}
+                viewport={{ margin: "50px", once: true }}
             >
                 <motion.div layoutId={`image-${image.name}-${id}`}>
                     <motion.img
