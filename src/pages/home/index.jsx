@@ -55,7 +55,7 @@ const Home = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(null);
-    const [randomImages, setRandomImages] = useState([]);
+    const [randomImage, setRandomImage] = useState(null);
     const monthRefs = useRef({});
     const dialogRef = useRef(null);
 
@@ -87,17 +87,21 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        if (dialogOpen) {
-            getRandomImages();
-        }
-    }, [dialogOpen]);
+        const getRandomImage = () => {
+            const allImagesArray = Object.values(allImages).flat();
+            if (allImagesArray.length > 0) {
+                setRandomImage(
+                    allImagesArray[
+                        Math.floor(Math.random() * allImagesArray.length)
+                    ],
+                );
+            }
+        };
 
-    const getRandomImages = () => {
-        const allImagesArray = Object.values(allImages).flat();
-        const shuffled = allImagesArray.sort(() => 0.5 - Math.random());
-        const selectedImages = shuffled.slice(0, 9);
-        setRandomImages(selectedImages);
-    };
+        if (dialogOpen) {
+            getRandomImage();
+        }
+    }, [dialogOpen, allImages]);
 
     const scrollToMonth = (month) => {
         if (monthRefs.current[month]) {
@@ -180,7 +184,7 @@ const Home = () => {
                         transition={{ duration: 0.3 }}
                         className="fixed inset-0 z-50 flex items-center justify-center"
                         style={{
-                            backgroundImage: `url(${randomImages[0]?.url || ""})`,
+                            backgroundImage: `url(${randomImage?.url || ""})`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                         }}
