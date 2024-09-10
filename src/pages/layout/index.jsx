@@ -12,7 +12,7 @@ const Layout = () => {
     const [user, loading] = useAuthState(auth);
 
     return (
-        <div className="flex min-h-screen w-screen flex-col">
+        <div className="flex min-h-screen w-screen flex-col antialiased">
             <Navbar user={user} />
             <main className="bg-grey-50 flex grow flex-col p-10">
                 <ScrollButton />

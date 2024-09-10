@@ -238,9 +238,9 @@ const Home = () => {
                                             className={`flex items-center gap-2 rounded-xl p-3 text-white shadow-lg backdrop-blur-md backdrop-filter ${
                                                 hasImages
                                                     ? monthKey === selectedMonth
-                                                        ? "cursor-pointer bg-gray-50 bg-opacity-30"
-                                                        : "cursor-pointer bg-gray-200 bg-opacity-10"
-                                                    : "cursor-not-allowed opacity-50"
+                                                        ? "cursor-pointer bg-gray-50 bg-opacity-30 font-bold"
+                                                        : "cursor-pointer bg-gray-300 bg-opacity-20"
+                                                    : "cursor-not-allowed bg-gray-950 bg-opacity-20 text-white/50"
                                             }`}
                                             onClick={() => {
                                                 if (hasImages) {
@@ -265,13 +265,12 @@ const Home = () => {
                                             }}
                                         >
                                             {format(date, "MMMM")}
-                                            {monthKey ===
-                                                format(
-                                                    new Date(),
-                                                    "yyyy-MM",
-                                                ) && (
-                                                <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-xs opacity-70">
-                                                    current
+                                            {hasImages?.length > 0 && (
+                                                <span className="absolute -top-2 left-1/2 max-w-[80px] -translate-x-1/2 truncate text-nowrap text-xs">
+                                                    {hasImages?.length}{" "}
+                                                    {hasImages?.length > 1
+                                                        ? "images"
+                                                        : "image"}
                                                 </span>
                                             )}
                                         </motion.div>
